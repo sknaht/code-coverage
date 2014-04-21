@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools" package="com.alert.trela.internal" android:versionCode="15" android:versionName="3.6.0" android:installLocation="auto">
+
+    <uses-sdk android:minSdkVersion="8" android:targetSdkVersion="18" />
+
+    <instrumentation android:name="com.alert.instrumentation.MyInstrumentation" android:targetPackage="com.alert.trela.internal"></instrumentation>
+
+    
+
+    <uses-feature android:required="false" android:glEsVersion="0x00020000"/>
+    <uses-feature android:name="android.hardware.camera" android:required="false"/>
+    <uses-feature android:name="android.hardware.camera.autofocus" android:required="false"/>
+    <uses-feature android:name="android.hardware.screen.landscape" android:required="false"/>
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <!-- Require fine location for StoreLocator and location-aware menu list -->  
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <!-- Get unique device IDs for phone devices, IMEI or MEID etc. -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <!-- Require write permission to save photos for ARGallery, and read permission to access device photo gallery -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <!-- Enter off-line mode if network isn't available -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <!-- Use MAC addresses as unique device IDs for non-phone devices -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <!-- Transfer gifts to phone contacts -->
+    <uses-permission android:name="android.permission.READ_CONTACTS"/>
+    <!-- App receives GCM messages. -->
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE"/>
+    <!-- GCM requires a Google account. -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+    <!-- Keeps the processor from sleeping when a message is received. -->
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>    
+    <!-- Only alert can receive GCM messages and registration result -->
+    <permission android:name="com.alert.trela.internal.permission.C2D_MESSAGE" android:protectionLevel="signature"/>
+    <uses-permission android:name="com.alert.trela.internal.permission.C2D_MESSAGE"/>
+    <!-- Barcode reader -->
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.FLASHLIGHT"/>
+	<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+
+	<application android:name="com.alert.utils.settings.AppStateManager" android:icon="@drawable/icon" android:label="Trela Internal" android:theme="@style/AlertTheme" android:allowBackup="true">
+
+        <uses-library android:name="com.google.android.maps"/>
+
+        <!-- Declare activities used for this app -->
+        <activity android:name="com.alert.instrumentation.EmmaInstrumentation$InstrumentedActivity"></activity>
+        <activity android:noHistory="true" android:name="com.alert.ui.activity.DispatchActivity" android:theme="@style/SplashBackground" android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="alert4b"/>
+            </intent-filter>
+        </activity>
+        <activity android:launchMode="singleTask" android:alwaysRetainTaskState="true" android:name="com.alert.ui.activity.LoginActivity" android:screenOrientation="portrait" android:configChanges="orientation|screenSize"/>
+        <activity android:name="com.facebook.LoginActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar" android:label="Trela Internal"/>
+        <activity android:name="com.alert.ui.activity.NewsActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.alert.ui.activity.EventsActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.alert.ui.activity.LinkAccountActivity" android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="com.alert.ui.AlertActions.LINK_ACCOUNT"/>
+                <category android:name="com.alert.trela.internal"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        <activity android:name="com.alert.ui.activity.BrandDetailsActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.alert.ui.activity.EventDetailsActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.alert.ui.activity.PhotoGalleryActivity" android:configChanges="orientation|screenSize"/>
+        <activity android:name="com.alert.ui.activity.PDFDetailsActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.alert.ui.activity.MediaPlayerActivity" android:configChanges="orientation|screenSize"/>
+        <activity android:name="com.alert.ui.activity.ServerSearchActivity" android:windowSoftInputMode="stateAlwaysVisible" android:screenOrientation="portrait"/>
+        <activity android:name="com.alert.ui.activity.InlineBrowserActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.alert.ui.activity.PostCommentActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.alert.ui.activity.EventDetailMapActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.alert.ui.activity.AccountActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.alert.ui.activity.CreateAccountActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.alert.ui.activity.FeedbackActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.alert.ui.activity.TutorialActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar" android:screenOrientation="portrait"/>
+        <activity android:name="com.alert.ui.activity.MusicNotificationDisplay" android:screenOrientation="portrait" android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+        <activity android:name="com.alert.ui.activity.FreeProductDetailsActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.alert.ui.activity.PhotoSavingActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.alert.ui.activity.ViewTrackingLogActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.alert.ui.activity.InboxDetailsActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.alert.ui.activity.GiftDetailsActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.alert.ui.activity.GiftcardGiftDetailsActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.alert.ui.activity.TicketGiftDetailsActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.alert.ui.activity.ContentDetailsActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.alert.ui.activity.OfferDetailsActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.alert.ui.activity.ProductDispatchActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+        <activity android:name="com.google.zxing.client.android.CaptureActivity" android:theme="@android:style/Theme.NoTitleBar.Fullscreen" android:windowSoftInputMode="stateAlwaysHidden" android:screenOrientation="landscape" android:configChanges="keyboardHidden"/>
+        <activity android:name="com.alert.ui.activity.CameraActivity" android:screenOrientation="landscape"/>
+        <activity android:name="com.alert.ui.activity.OfferDispatchActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+        <activity android:name="com.alert.ui.activity.LoyaltyCardActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.alert.ui.activity.GiftCardsActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.alert.ui.activity.LinkGiftCardActivity" android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="com.alert.ui.AlertActions.VIEW_GIFT_CARD_TEMPLATE"/>
+                <category android:name="com.alert.trela.internal"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>		            
+        </activity>
+        <activity android:name="com.alert.ui.activity.LinkGiftCardResultActivity" android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="com.alert.ui.AlertActions.VIEW_GIFT_CARD"/>
+                <category android:name="com.alert.trela.internal"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>		            
+        </activity>
+        <activity android:name="com.alert.ui.activity.ImageViewerActivity" android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/> 
+        <activity android:name="com.alert.ui.activity.EditAccountActivity" android:screenOrientation="portrait" android:configChanges="orientation|screenSize"/>
+        <activity android:name="com.alert.ui.activity.LinkGalleryDetailsActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.alert.ui.activity.SlapshotOverlayChooserActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.alert.ui.activity.InboxActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.alert.ui.activity.PaypalActionActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.alert.ui.activity.ClaimCouponActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.paypal.android.MEP.PayPalActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar" android:configChanges="keyboardHidden|orientation" tools:ignore="InnerclassSeparator"/>
+        <activity android:name="com.alert.ui.activity.BadgeInfoActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.alert.ui.activity.BrandSearchActivity" android:theme="@android:style/Theme.NoTitleBar" android:windowSoftInputMode="adjustPan" android:screenOrientation="portrait"/>	
+        <activity android:name="com.alert.ui.activity.InviteFriendsActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.alert.ui.activity.VoucherDetailsActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.alert.ui.activity.PersonalMessageActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.alert.ui.activity.SearchFriendsActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.alert.ui.activity.SearchFriendsGridActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.alert.ui.activity.ValidateAccountActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.alert.ui.activity.ConfirmTicketTransferActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan"/>
+        <activity android:name="com.alert.ui.activity.GiftSummaryActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.alert.ui.activity.PaypalResultActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.alert.ui.activity.SelectFriendsActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.alert.ui.activity.ArchiveActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.alert.ui.activity.ProductScannerActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize" android:theme="@android:style/Theme.NoTitleBar" android:configChanges="orientation|keyboardHidden|screenSize"/>
+        <activity android:name="com.alert.ui.activity.AlertMainActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan"/>
+        <activity android:name="com.alert.ui.activity.VouchersActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.alert.ui.activity.PlacedOrderDetailsActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.alert.ui.activity.PlacedOrderItemsActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.alert.ui.activity.ExplorerActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.alert.ui.activity.StoreLocatorActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.alert.ui.activity.ShopDetailsActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.alert.ui.activity.StoreMediaListActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.alert.ui.activity.UpgradeSessionActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.alert.ui.activity.BadgesActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.alert.ui.activity.SocialActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.alert.ui.activity.PlacedOrdersActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.alert.ui.activity.WebShopActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.alert.ui.activity.RootCatalogActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan|stateHidden"/>
+        <activity android:name="com.alert.ui.activity.CategoryProductsActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan|stateHidden"/>
+        <activity android:name="com.alert.ui.activity.ProductDetailsActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan|stateHidden"/>
+        <activity android:name="com.alert.ui.activity.ShoppingCartActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan|stateHidden"/>
+        <activity android:name="com.alert.ui.activity.ShoppingCheckoutActivity" android:screenOrientation="portrait" android:windowSoftInputMode="stateHidden"/>
+        <activity android:name="com.alert.ui.activity.CheckoutInfoSelectActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.alert.ui.activity.ShippingInfoActivity" android:screenOrientation="portrait" android:windowSoftInputMode="stateHidden"/>
+        <activity android:name="com.alert.ui.activity.BillingInfoActivity" android:screenOrientation="portrait" android:windowSoftInputMode="stateHidden"/>
+        <activity android:name="com.alert.ui.activity.CheckoutGiftCardActivity" android:screenOrientation="portrait" android:windowSoftInputMode="stateHidden"/>
+        <activity android:name="com.alert.ui.activity.CheckoutCouponActivity" android:screenOrientation="portrait" android:windowSoftInputMode="stateHidden"/>
+        <activity android:name="com.alert.ui.activity.StoreCategoryActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.alert.ui.activity.GiftingActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan|stateHidden"/>
+        <activity android:name="com.alert.ui.activity.SettingsActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.alert.ui.activity.FileViewerActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.alert.ui.activity.LocationLogListActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.alert.ui.activity.GiftSendMethodActivity" android:screenOrientation="portrait" android:exported="false">   
+            <intent-filter>
+                <action android:name="com.alert.ui.AlertActions.SELECT_SEND_METHOD"/>
+                <category android:name="com.alert.trela.internal"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+		<activity android:name="com.alert.ui.activity.RewardsActivity" android:screenOrientation="portrait"/>
+
+
+
+        <!-- Declare services used for this app -->
+        <service android:name="com.alert.utils.location.LocationListenerService" android:icon="@drawable/icon" android:label="@string/service_name" android:enabled="true"/>
+        <service android:name="com.alert.push.GCMIntentService"/>
+
+        <!-- Declare broadcast receivers used for this app -->
+        <!-- GCM broadcast receiver -->
+        <receiver android:name="com.google.android.gcm.GCMBroadcastReceiver" android:permission="com.google.android.c2dm.permission.SEND">
+          <intent-filter>
+              <action android:name="com.google.android.c2dm.intent.REGISTRATION"/>
+              <action android:name="com.google.android.c2dm.intent.RECEIVE"/>
+              <category android:name="com.alert.trela.internal"/>
+          </intent-filter>
+        </receiver>
+        <!-- Network connectivity status change receiver -->
+        <receiver android:name="com.alert.utils.NetworkConnectivityReceiver">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
+            </intent-filter>
+        </receiver>
+        
+        <receiver android:name="com.alert.utils.location.LocationBroadcastReceiver">  
+		    <intent-filter>  
+		        <action android:name="android.intent.action.BOOT_COMPLETED"/>
+		        <action android:name="android.intent.action.EXTERNAL_APPLICATIONS_AVAILABLE"/>  
+  		    </intent-filter>  
+		</receiver>
+
+        <!-- adb shell am broadcast -a com.example.pkg.END_EMMA -->
+        <receiver android:name="com.alert.instrumentation.EndEmmaBroadcast" >
+           <intent-filter>
+               <action android:name="com.alert.END_EMMA" />
+           </intent-filter>
+        </receiver>
+        
+    </application>
+
+</manifest>
